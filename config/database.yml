@@ -83,7 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: boughtandsold_production
-  username: boughtandsold
-  password: boughtandsold
+	database: boughtandsold_production
+	username: boughtandsold
+	password: boughtandsold
 	host: localhost
