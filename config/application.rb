@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+CONFIG = YAML.load_file(File.expand_path('../app.yml', __FILE__))[Rails.env]
+
 module BoughtAndSold
   class Application < Rails::Application
     

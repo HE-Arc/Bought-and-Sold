@@ -82,7 +82,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: Bought-and-Sold_production
-  username: Bought-and-Sold
-  password: <%= ENV['BOUGHT-AND-SOLD_DATABASE_PASSWORD'] %>
+ <<: *default
+ database: boughtandsold_production
+ username: boughtandsold
+ password: boughtandsold
+ host: localhost
