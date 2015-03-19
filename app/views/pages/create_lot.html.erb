@@ -1,32 +1,16 @@
 <form role="form">
   <div class="container">
     <div class="row">	   
-      <div class="col-md-9">
+      <div class="col-md-10">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label>Name of the lot</label>
-              <input class="form-control" placeholder="Name">
+              <input class="form-control" id="test" placeholder="Name">
             </div>
-			<div class="form-group">
+            <div class="form-group">
               <label>Categorie</label>
               <input class="form-control" placeholder="Categorie">
-            </div>
-			<div class="form-group">
-              <label>Buy Date</label>
-              <input class="form-control" placeholder="Name">
-            </div>
-			<div class="form-group">
-              <label>Buy Price</label>
-              <input class="form-control" placeholder="Name">
-            </div>
-			<div class="form-group">
-              <label>Sold Date</label>
-              <input class="form-control" placeholder="Name">
-            </div>
-			<div class="form-group">
-              <label>Sold Price</label>
-              <input class="form-control" placeholder="Name">
             </div>
             <p>
             <div class="form-group">
@@ -34,6 +18,28 @@
               <textarea class="form-control" rows="3"></textarea>
             </div>
             </p>
+            <div class="form-group">
+              <label>Buy Price</label>
+              <input class="form-control" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label>Sold Price</label>
+              <input class="form-control" placeholder="Name">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                <label>Buy Date</label>
+                  <div id="calendar" ></div>
+                </div>
+                <div class="col-md-3">
+                  <label>Sold Date</label>
+                  <div id="calendarSold" class="theme-light" ></div>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
@@ -54,3 +60,16 @@
   </div>
   </div>
 </form>
+<script>
+  //TODO : RECUP VALEUR CALENDRIER, METTRE A JOUR LE SOLD PAR RAPPORT AU BUY
+  $(function () {
+  $("#calendar").shieldCalendar({
+    focused: new Date(2016, 2, 31)
+  });
+  $("#calendarSold").shieldCalendar({
+    focused: new Date(2016, 2, 31),
+    min: new Date("2014/2/23"),
+    max: new Date("2039/3/1"),
+    value: new Date()
+  });
+});</script>
