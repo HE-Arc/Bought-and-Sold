@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320150405) do
+ActiveRecord::Schema.define(version: 20150321173423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,19 @@ ActiveRecord::Schema.define(version: 20150320150405) do
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
+
+  create_table "lots", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.float    "price_buy"
+    t.float    "price_sold"
+    t.float    "price_estimated"
+    t.datetime "date_buy"
+    t.datetime "date_sold"
+    t.datetime "created_at"
+    t.integer  "user_id"
+    t.integer  "parent_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

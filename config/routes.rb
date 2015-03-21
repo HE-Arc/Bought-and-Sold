@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "register" => "pages#register"
   get "login" => "pages#login"
   get "lot" => "pages#lot"
-  get "lots" => "pages#lots"
+	get "lots" => "lots#index"
   get "create_lot" => "pages#create_lot"
   get "about" => "pages#about"
 	
