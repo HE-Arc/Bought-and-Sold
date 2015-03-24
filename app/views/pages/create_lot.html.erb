@@ -1,64 +1,80 @@
-<div class="row">	   
-  <div class="col-md-12">
-    <form role="form">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label>Name of the lot</label>
-          <input class="form-control" id="test" placeholder="Name">
-        </div>
-        <div class="form-group">
-          <label>Categorie</label>
-          <input class="form-control" placeholder="Categorie">
-        </div>
-        <div class="form-group">
-          <label>Description of the lot</label>
-          <textarea class="form-control" rows="3"></textarea>
-        </div>
-        <div class="row">	   
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Buy Price</label>
-              <input class="form-control" placeholder="$$$">
-            </div>
-          </div>
-          <div class="col-md-4">
-            
-            <div class="form-group" class="fa fa-calendar">
-              <label>Buy Date</label>
-              <input id="datepickerBuy">
-            </div>
-
-          </div>
-        </div>
-        <div class="row">	   
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Sold Price</label>
-              <input class="form-control" placeholder="$$$">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Sold Date</label>
-              <input id="datepickerSold" class="fa fa-calendar">
-            </div>
-          </div>
-        </div>
-      </div>
-        <div class="col-md-10">
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">List of Lots</h3>
-            </div>
-            <div class="panel-body">
-              <button type="button" class="btn btn-primary">Add</button>
-              <div id="shieldui-grid1"></div>
-            </div>
-          </div>
-        </div>
-        </form>
+<div class="page-header" id="banner">
+  <div class="row">
+    <div class="col-lg-8 col-md-7 col-sm-6">
+      <h1>New Lot</h1>
+      <p class="lead">Created at xx/xx/xxxx</p>
+    </div>
   </div>
 </div>
+
+<form class="form-horizontal">
+  <fieldset>
+    <legend>Here you can create a lot</legend>
+    <div class="form-group">
+      <label for="inputName" class="col-lg-2 control-label">Name</label>
+      <div class="col-lg-10">
+        <input class="form-control" id="inputName" placeholder="Name" type="text">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="select" class="col-lg-2 control-label">Categories</label>
+      <div class="col-lg-10">
+        <select multiple="" class="form-control">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <span class="help-block">Maintain Ctrl to select several categories</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">Description</label>
+      <div class="col-lg-10">
+        <textarea class="form-control" rows="3" id="textArea"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="buy" class="col-lg-2 control-label">Buy Price</label>
+      <div class="col-lg-10">
+        <input class="form-control" id="buy" placeholder="$$$" type="text">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="datepickerBuy" class="col-lg-2 control-label">Buy Date</label>
+      <div class="col-lg-10">
+        <input id="datepickerBuy">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="buy" class="col-lg-2 control-label">Sold Price</label>
+      <div class="col-lg-10">
+        <input class="form-control" id="buy" placeholder="$$$" type="text">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="datepickerBuy" class="col-lg-2 control-label">Sold Date</label>
+      <div class="col-lg-10">
+        <input id="datepickerSold">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
 <script>
   //TODO : RECUP VALEUR CALENDRIER, METTRE A JOUR LE SOLD PAR RAPPORT AU BUY
   $(function () {

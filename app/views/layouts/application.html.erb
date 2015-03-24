@@ -13,14 +13,10 @@
     <!-- BOOTSTRAP -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
-    <link id="gridcss" rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/dark-bootstrap/all.min.css" />
-
   </head>
 
   <body>
-
+ 
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -30,14 +26,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Bought'n'Sold</a>
+          <a class="navbar-brand" href="/home">Bought'n'Sold</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Lots</a></li>
-            <li><a href="#">About</a></li>
+            <li class="active"><a href="/home">Home</a></li>
+            <li><a href="/lots">Lots</a></li>
+            <li><a href="/about">About</a></li>
           </ul>
           <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
@@ -51,7 +47,7 @@
               <% if user_signed_in? %>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong><%= current_user.email %></strong><span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">  
-                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                <li><a href="#">Profile</a></li>
                 <li><%= link_to "Settings", edit_user_registration_path, :class => 'navbar-link fa'  %></li>
                 <li class="divider"></li>
                 <li><%= link_to " Logout", destroy_user_session_path, method: :delete, :class => 'fa fa-power-off'  %></li>
