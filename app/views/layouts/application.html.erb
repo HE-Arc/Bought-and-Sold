@@ -1,94 +1,78 @@
 <!DOCTYPE html>
 <html>
-	<head>
+  <head>
 
-		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-		<%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Bought'n'Sold</title>    
+    <meta charset="utf-8">
 
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/local.css" />
+    <title>Bought'n'Sold</title>    
 
-		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- you need to include the shieldui css and js assets in order for the charts to work -->
-		<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css" />
-		<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
-		<link id="gridcss" rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/dark-bootstrap/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
+    <link id="gridcss" rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/dark-bootstrap/all.min.css" />
 
-		<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
-		<script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
+  </head>
 
-	</head>
+  <body>
 
-	<body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bought'n'Sold</a>
+        </div>
 
-		<div id="wrapper">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Lots</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input class="form-control" placeholder="Search" type="text">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+          </form>
+          <!-- RIGHT PART OF THE NAVBAR -->
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <% if user_signed_in? %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong><%= current_user.email %></strong><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">  
+                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                <li><%= link_to "Settings", edit_user_registration_path, :class => 'navbar-link fa'  %></li>
+                <li class="divider"></li>
+                <li><%= link_to " Logout", destroy_user_session_path, method: :delete, :class => 'fa fa-power-off'  %></li>
+              </ul>
+              <% else %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Authentication <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to "Sign in", new_user_registration_path, :class => 'navbar-link fa'  %></li>
+                <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link fa'  %></li>
+              </ul>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="home">Bought'n'Sold</a>
-				</div>
+    <div class="container">
 
-				<div class="collapse navbar-collapse navbar-ex1-collapse">
-					<ul id="active" class="nav navbar-nav side-nav">
-						<!-- SELECTION ICI -->
-						<li class="selected"><a href="home"><i class="fa fa-bullseye"></i> Home</a></li>
-						<li><a href="lots"><i class="fa fa-tasks"></i> Lots</a></li>
-						<li><a href="about"><i class="fa fa-globe"></i> About</a></li>
-					</ul>
+      <%= yield %>
 
-					<ul class="nav navbar-nav navbar-right navbar-user">
-						<li class="dropdown user-dropdown">
-							<% if user_signed_in? %>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <strong><%= current_user.email %></strong><b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-								<li><%= link_to "Settings", edit_user_registration_path, :class => 'navbar-link fa'  %></li>
-								<li class="divider"></li>
-								<li><%= link_to " Logout", destroy_user_session_path, method: :delete, :class => 'fa fa-power-off'  %></li>
-							</ul>
-							<% else %>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Authentication<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><%= link_to "Sign in", new_user_registration_path, :class => 'navbar-link fa'  %></li>
-								<li><%= link_to "Login", new_user_session_path, :class => 'navbar-link fa'  %></li>
-							</ul>
-							<% end %>
-
-						</li>
-						<li class="divider-vertical"></li>
-						<li>
-							<form class="navbar-search form-group input-group">
-								<input type="text" class="form-control">
-								<span class="input-group-btn">
-									<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-								</span>
-							</form>
-						</li>
-
-					</ul>
-				</div>
-			</nav>
-
-			<div id="page-wrapper">
-
-				<%= yield %>
-
-			</div>
-
-		</div>
-	</body>
+    </div>  
+  </body>
 </html>
