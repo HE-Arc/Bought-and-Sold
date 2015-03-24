@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Lots !!</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          List of Lots </h3>
+      </div>
+      <div class="panel-body">
+        <div id="shieldui-grid1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% @lots.each do |lot| %>
+    <tr>
+			<td><%= lot.id %></td>
+			<td><%= lot.name %></td>
+    </tr>
+<% end %>
+
+<!-- TO FILL THE LIST -->
+
+<script type="text/javascript">
+  jQuery(function ($) {
+    var lots = [
+				<% @lots.each do |lot| %>
+				{name: "<%= lot.name %>",
+				description: "<%= lot.description %>"},
+				<% end %>
+        /*name: "name", categorie: "categorie", description: "j'aime les koalas", date_buy: "11/02/2015", price_buy: 10, date_sold: "12/02/2015",price_sold:12,parent_name:"Null",created_at:"01/01/2015",edit:"<button type='button' class='btn btn-primary'>Edit</button>"
+      },
+      {
+        name: "name2", categorie: "categorie2", description: "2j'aime les koalas", date_buy: "01/02/2015", price_buy: 10, date_sold: "02/02/2015",price_sold:12,parent_name:"Null",created_at:"11/01/2015",edit:"<button type='button' class='btn btn-primary'>Edit</button>"
+      }*/
+    ];
+
+    $("#shieldui-grid1").shieldGrid({
+      dataSource: {
+        data: lots
+      },
+      sorting: {
+        multiple: true
+      },
+      rowHover: false,
+      paging: {
+        pageSize:3
+      },
+      columns: [
+        { field: "name", title: "Name" },
+        { field: "categorie", title: "Categorie" },                
+        { field: "description", title: "Description" },
+        { field: "date_buy", title: "Buy Date", format: "{0:MM/dd/yyyy}" },
+        { field: "price_buy", title: "Buy Price",format: "{0} CHF" },
+        { field: "date_sold", title: "Sold Date",format: "{0:MM/dd/yyyy}" },
+        { field: "price_sold", title: "Sold Price",format: "{0} CHF" },
+        { field: "parent_name", title: "Parent" },
+        { field: "created_at", title: "Created at",format: "{0:MM/dd/yyyy}" },
+        { field: "edit", width:"60px", title: "Edit" },
+      ],
+      /*
+      editing: {
+        enabled: true,
+        event: "doubleclick
+        type: "cell", 
+        confirmation: {
+        "delete": {
+        enabled: true,
+        template: "Delete row {0}?"
+      }
+    }
+    }*/
+});        
+});        
+  /*function EditRow() {
+    $("#shieldui-grid1").swidget().editRow(0); // puts second row in edit mode.
+}*/
+</script>
