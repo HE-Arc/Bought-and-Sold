@@ -24,7 +24,7 @@
                     text: "Profits"
                 },
                 exportOptions: {
-                    image: true,
+                    image: false,
                     print: false
                 },
                 axisX: {
@@ -62,16 +62,20 @@
                     text: "Bought'n'Sold"
                 },
                 exportOptions: {
-                    image: true,
+                    image: false,
                     print: false
                 },
     dataSeries: [
     {
         collectionAlias: "Bought",
         seriesType: "pie",
-        data: [10,90]
+        data: [90]
+    },
+     {
+        collectionAlias: "Sold",
+        seriesType: "pie",
+        data: [10]
     }
-     
     ]
   });
 </script>
