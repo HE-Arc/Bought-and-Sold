@@ -1,0 +1,65 @@
+<div class="page-header" id="banner">
+	<div class="row">
+		<div class="col-lg-8 col-md-7 col-sm-6">
+			<h1><%= @lot.name %> </h1>
+			<p class="lead">Created at <%= @lot.created_at %></p>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">Description</div>
+	<div class="panel-body">
+		<%= @lot.description %>
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">Categorie</div>
+	<div class="panel-body">
+		<%= @lot.name %>
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">Bought</div>
+	<div class="panel-body">
+		<% if @lot.date_buy %>
+				<strong><%=  @lot.date_buy.to_formatted_s.split(' ')[0] %></strong>,
+		purchased for <strong><%= @lot.price_buy %> $</strong>
+		<% end %>
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">Sold</div>
+	<div class="panel-body">
+		<% if @lot.date_sold %>
+				<strong><%=  @lot.date_buy.to_formatted_s.split(' ')[0] %></strong>,
+		sold for <strong><%= @lot.price_buy %> $</strong>
+		<% end %>
+		Not sold yet
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">Belongs to</div>
+	<div class="panel-body">
+		<% if @lot.parent_id	%> <% parentName = Lot.find(@lot.parent_id).name  %> <a href=<%= @lot.parent_id%>> <%= parentName %></a> <% else %> - <% end %>
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">Children</div>
+	<div class="panel-body">
+		<% children=  Lot.where(parent_id: @lot.id)%>
+		-
+		<% if children	%> 
+			<% children.each do |c| %>  
+				<a href=<%= c.id %>><%= c.name %></a> - 
+			<% end %>
+		<% else %>
+			-
+		<% end %>
+	</div>
+</div>
