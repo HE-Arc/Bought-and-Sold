@@ -5,7 +5,73 @@
 </div>
 
 <div class="jumbotron">
-  <h1>What's new ?</h1>
-  <p>Nothing...</p>
-  <p><a class="btn btn-primary btn-lg">I like poneys</a></p>
+  <h1>What's your current profits ?</h1>
+    <div id="shieldui-chart-profits"></div>
 </div>
+
+<div class="jumbotron">
+  <h1>What's your current state ?</h1>
+    <div id="shieldui-chart-bought-sold"></div>
+</div>
+
+<script>
+  var performance = [12, 43, 34, 22, 12, 33, 4, 17, 22, 34, 54, 67]
+  var perf = [30,12,50,1,10]
+  $("#shieldui-chart-profits").shieldChart({
+                theme: "dark",
+
+                primaryHeader: {
+                    text: "Profits"
+                },
+                exportOptions: {
+                    image: true,
+                    print: false
+                },
+                axisX: {
+                  axisTickText: {
+                      // format the text as a currency
+                      format: "TROU",
+                      step: 2
+                  }
+                },
+                axisY: {
+                  axisTickText: {
+                      // format the text as a currency
+                      format: "{text:c}"
+                  }
+                },
+    dataSeries: [
+    {
+        collectionAlias: "Bought",
+        seriesType: "bar",
+        data: [233, 123, 345, 34, 27]
+    },
+    {
+        collectionAlias: "Sold",
+        seriesType: "bar",
+        data: [12, 345, 12, 45, 123]
+    }
+     
+    ]
+  });
+  
+   $("#shieldui-chart-bought-sold").shieldChart({
+                theme: "dark",
+
+                primaryHeader: {
+                    text: "Bought'n'Sold"
+                },
+                exportOptions: {
+                    image: true,
+                    print: false
+                },
+    dataSeries: [
+    {
+        collectionAlias: "Bought",
+        seriesType: "pie",
+        data: [10,90]
+    }
+     
+    ]
+  });
+</script>
