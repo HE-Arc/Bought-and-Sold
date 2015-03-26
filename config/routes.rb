@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 	
 	get 'users' => 'users#index'
 	
+	resources :lots
+	
 	resources :categories
 	get 'categories' => 'categories#index'
  
