@@ -6719,5 +6719,7 @@ a.list-group-item-danger.active:focus {
 }
 
 footer {
-    float: right;
+  position:fixed;
+  bottom:0;
+  right:0;
 }

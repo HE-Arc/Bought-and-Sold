@@ -3,7 +3,7 @@ class LotsController < ApplicationController
 		@lot = Lot.find(params[:id])
 	end	
 	def index
-		@lots = Lot.all
+    @lots = Lot.where(user_id: current_user.id)
 	end
 	private
 	def get_params

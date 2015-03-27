@@ -1,81 +1,123 @@
 <div class="row">
-	<div class="col-lg-12">
-		<h1>Home <small>Welcome userName</small></h1>
-	</div>
+  <div class="col-lg-12">
+    <h1>Home <small>Welcome <%= current_user.firstname %></small></h1>
+  </div>
 </div>
 
 <div class="jumbotron">
   <h1>What's your current profits ?</h1>
-    <div id="shieldui-chart-profits"></div>
+  <div id="shieldui-chart-profits"></div>
 </div>
 
 <div class="jumbotron">
   <h1>What's your current state ?</h1>
-    <div id="shieldui-chart-bought-sold"></div>
+  <div id="shieldui-chart-bought-sold"></div>
 </div>
 
 <script>
-  var performance = [12, 43, 34, 22, 12, 33, 4, 17, 22, 34, 54, 67]
-  var perf = [30,12,50,1,10]
-  $("#shieldui-chart-profits").shieldChart({
-                theme: "dark",
+<% incr = 1 %>
+       
+   var lotsSold = [
+       <% @lots.each do |lot| %>   
+        {
+          x: <%= incr %>,
+         y: <%= lot.price_sold %>,
+          pointName: "<%= lot.name %>"
+          
+        },
+       <% incr +=1 %>
+       <% end %>
+    ]
+  
+       <% incr = 1 %>
+   var lotsBougt = [
+       <% @lots.each do |lot| %>   
+        {
+          x: <%= incr %>,
+          y: <%= lot.price_buy %>,
+          pointName: "<%= lot.name %>"
+          
+        },
+       <% incr +=1 %>
+       <% end %>
+    ]
 
-                primaryHeader: {
-                    text: "Profits"
-                },
-                exportOptions: {
-                    image: false,
-                    print: false
-                },
-                axisX: {
-                  axisTickText: {
-                      // format the text as a currency
-                      format: "TROU",
-                      step: 2
-                  }
-                },
-                axisY: {
-                  axisTickText: {
-                      // format the text as a currency
-                      format: "{text:c}"
-                  }
-                },
+  var lots = [
+    <% @lots.each do |lot| %>
+    {
+      name: "<a href=lots/<%= lot.id%>> <%= lot.name %></a>",
+      price_buy: "<%= lot.price_buy %>",
+      price_sold: "<%= lot.price_sold %>"
+    },
+    <% end %>
+  ]
+
+    $("#shieldui-chart-profits").shieldChart({
+    theme: "dark",
+
+    primaryHeader: {
+    text: "Profits"
+    },
+    exportOptions: {
+    image: false,
+    print: false
+    },
+    axisX: {
+    axisTickText: {
+    format: "{point.name}",
+    step: 10
+    }
+    },
+    axisY: {
+    axisTickText: {
+    // format the text as a currency
+    format: "{text:c}"
+    }
+    },
+    seriesSettings: {
+    bar: {
+        dataPointText: {
+            enabled: true,
+            format: "{point.y:n2}"
+        }
+    }
+},
     dataSeries: [
     {
-        collectionAlias: "Bought",
-        seriesType: "bar",
-        data: [233, 123, 345, 34, 27]
+    collectionAlias: "Bought",
+    seriesType: "bar",
+    data: lotsBougt
     },
     {
-        collectionAlias: "Sold",
-        seriesType: "bar",
-        data: [12, 345, 12, 45, 123]
+    collectionAlias: "Sold",
+    seriesType: "bar",
+    data: lotsSold
     }
-     
-    ]
-  });
-  
-   $("#shieldui-chart-bought-sold").shieldChart({
-                theme: "dark",
 
-                primaryHeader: {
-                    text: "Bought'n'Sold"
-                },
-                exportOptions: {
-                    image: false,
-                    print: false
-                },
+  ]
+  });
+
+  $("#shieldui-chart-bought-sold").shieldChart({
+    theme: "dark",
+
+    primaryHeader: {
+      text: "Bought'n'Sold"
+    },
+    exportOptions: {
+      image: false,
+      print: false
+    },
     dataSeries: [
-    {
+      {
         collectionAlias: "Bought",
         seriesType: "pie",
         data: [90]
-    },
-     {
+      },
+      {
         collectionAlias: "Sold",
         seriesType: "pie",
         data: [10]
-    }
+      }
     ]
   });
 </script>
