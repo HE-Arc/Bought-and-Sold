@@ -27,6 +27,8 @@ class CategoriesController < ApplicationController
 	end
 	
 	def show
+		@categorie = Categorie.find(params[:id])
+		@lots = Lot.where(categorie_id: @categorie.id, user_id: current_user.id)
 	end
 
 	private

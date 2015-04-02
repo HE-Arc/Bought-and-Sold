@@ -46,7 +46,7 @@ $(function()
             },
         axisTickText: {
           format: "",
-          step: 10
+          step: 4
         }
       },
       axisY: {

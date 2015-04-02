@@ -6,17 +6,12 @@ Rails.application.routes.draw do
   get "home" => "pages#home"
   get "graphics" => "graphics#index"
   get "graphics/values" => "graphics#values"
-	get "lots" => "lots#index"
-  get "create_lot" => "pages#create_lot"
-  get "about" => "pages#about"
-	
-	get 'users' => 'users#index'
-	
+	get "about" => "pages#about"
+
 	resources :lots
 	
 	resources :categories
-	get 'categories' => 'categories#index'
- 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

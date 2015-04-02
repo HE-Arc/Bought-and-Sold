@@ -1,76 +1,89 @@
 <div class="page-header" id="banner">
-  <div class="row">
-    <div class="col-lg-8 col-md-7 col-sm-6">
-      <h1>New Lot</h1>
-      <p class="lead">Created at xx/xx/xxxx</p>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-lg-8 col-md-7 col-sm-6">
+			<h1>New Lot</h1>
+			<p class="lead">Created at <%= DateTime.now.to_date %></p>
+		</div>
+	</div>
 </div>
 
 <form class="form-horizontal">
-  <fieldset>
-    <legend>Here you can create a lot</legend>
-    <div class="form-group">
-      <label for="inputName" class="col-lg-2 control-label">Name</label>
-      <div class="col-lg-6">
-        <input class="form-control" id="inputName" placeholder="Name" type="text">
-      </div>
-    </div>
+	<fieldset>
+		<legend>Here you can create a lot</legend>
+		<% @lot = Lot.new%>
+		<%= form_for @lot do |f| %>
+		<div class="form-group">
+			<%= f.label :name,:class=>"col-lg-2 control-label"%>
+			<div class="col-lg-6">
+				<%= f.text_field :name,:placeholder=>"Name",:class=>"form-control" %>
+			</div>
+		</div>
 
-    <div class="form-group">
-      <label for="select" class="col-lg-2 control-label">Categories</label>
-      <div class="col-lg-6">
-        SELECT HERE
-      </div>
-    </div>
+		<div class="form-group">
+			<label for="select" class="col-lg-2 control-label">Categorie</label>
+			<div class="col-lg-2">
+				<% @categories = Categorie.all %>
+				<% @categorie = Categorie.new %>
+				<%= form_for @categorie do |f| %>
+				<p>
+					<%= collection_select(:video, :category_id, @categories, :id, :name,{:id=>'inputName'},{:class=>'form-control select'})%>
+					<%= f.label "Or add a new one : "%>
+					<%= f.text_field :name,:placeholder=>"New categorie ?",:class=>"form-control" %>
+				</p>
+				<% end %>
+			</div>
+		</div>
 
-    <div class="form-group">
-      <label for="textArea" class="col-lg-2 control-label">Description</label>
-      <div class="col-lg-6">
-        <textarea class="form-control" rows="3" id="textArea"></textarea>
-      </div>
-    </div>
+		<div class="form-group">			
+			<%= f.label :description,:class=>"col-lg-2 control-label"%>
+			<div class="col-lg-6">
+				<%= f.text_area :description,:placeholder=>"Add a description",:class=>"form-control" %>
+			</div>
+		</div>
 
-    <div class="form-group">
-      <label for="buy" class="col-lg-2 control-label">Buy Price</label>
-      <div class="col-lg-2">
-        <input class="form-control" id="buy" placeholder="$$$" type="text">
-      </div>
-    </div>
+		<div class="form-group">
+			<%= f.label :buy_price,:class=>"col-lg-2 control-label"%>
+			<div class="col-lg-2">
+				<%= f.text_field :price_buy,:placeholder=>"$$$",:class=>"form-control",:pattern=>"[0-9.]" %>
+			</div>
+		</div>
 
-    <div class="form-group">
-      <label for="datepickerBuy" class="col-lg-2 control-label">Buy Date</label>
-      <div class="col-lg-3">
-        <input id="datepickerBuy">
-      </div>
-    </div>
+		<div class="form-group">
+			<label for="datepickerBuy" class="col-lg-2 control-label">Buy Date</label>
+			<div class="col-lg-3">
+				<%= f.text_field :date_buy,:id=>"datepickerBuy",:class=>"form-control" %>
+			</div>
+		</div>
 
-    <div class="form-group">
-      <label for="buy" class="col-lg-2 control-label">Sold Price</label>
-      <div class="col-lg-2">
-        <input class="form-control" id="buy" placeholder="$$$" type="text">
-      </div>
-    </div>
+		<div class="form-group">
+			<%= f.label :sold_price,:class=>"col-lg-2 control-label"%>
+			<div class="col-lg-2">
+				<%= f.text_field :price_sold,:placeholder=>"$$$",:class=>"form-control",:pattern=>"[0-9.]" %>
+			</div>
+		</div>
 
-    <div class="form-group">
-      <label for="datepickerBuy" class="col-lg-2 control-label">Sold Date</label>
-      <div class="col-lg-3">
-        <input id="datepickerSold">
-      </div>
-    </div>
+		<div class="form-group">
+			<label for="datepickerBuy" class="col-lg-2 control-label">Sold Date</label>
+			<div class="col-lg-3">
+				<%= f.text_field :date_sold,:id=>"datepickerSold",:class=>"form-control" %>
+			</div>
+		</div>
 
-    <div class="form-group">
-      <div class="col-lg-6 col-lg-offset-2">
-        <button type="reset" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </div>
-  </fieldset>
+		<div class="form-group">
+			<div class="col-lg-6 col-lg-offset-2">
+				<button type="reset" class="btn btn-default"><%= link_to "Cancel", :back %></button>
+				<%= f.submit "Add", :class=>"btn btn-primary" %>
+			</div>
+		</div>
+	</fieldset>
 </form>
+<%end%>
 
 <script>
-  //TODO : RECUP VALEUR CALENDRIER, METTRE A JOUR LE SOLD PAR RAPPORT AU BUY
-  $(function () {
-    $("#datepickerBuy").shieldDatePicker({});
-    $("#datepickerSold").shieldDatePicker({});
-  });</script>
+	//TODO : RECUP VALEUR CALENDRIER, METTRE A JOUR LE SOLD PAR RAPPORT AU BUY
+	$(function () {
+		$("#datepickerBuy").shieldDatePicker({});
+		$("#datepickerSold").shieldDatePicker({});
+	});
+
+</script>

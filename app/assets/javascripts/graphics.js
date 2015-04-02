@@ -9,19 +9,27 @@ $(document).ready(function() {
       for (var i = 0; i < data.length; i++) { 
         if(data[i].price_sold != 0){
           tmp = {};
-          //lotsBenefits.push(data[i].price_buy-data[i].price_sold);
           tmp.pointName = data[i].name;
           tmp.x = i;
           tmp.y = data[i].price_sold-data[i].price_buy;
           lotsBenefits.push(tmp);
           nbSold += 1;
         }
+        /*
+        else
+          {
+          tmp = {};
+          tmp.pointName = data[i].name;
+          tmp.x = i;
+          tmp.y = 0;
+          lotsBenefits.push(tmp);
+          }*/
         nbBuy += 1;
       }
       var total = nbBuy+nbSold;
 
       fillBenefits(lotsBenefits);
-      fillPercentage((nbBuy/total)*100,(nbSold/total)*100);
+      fillPercentage(Math.round((nbBuy/total)*100),Math.round((nbSold/total)*100));
     },
     type: "GET"
   });
@@ -40,7 +48,7 @@ $(document).ready(function() {
       axisX: {
         axisTickText: {
           format: "",
-          step: 10
+          step : 4
         }
       },
       axisY: {
@@ -59,6 +67,7 @@ $(document).ready(function() {
       dataSeries: [
         {
           collectionAlias: "Benefits",
+          color: "#CCCCCC",
           seriesType: "bar",
           data: lotsBenefits
         }
