@@ -3,7 +3,8 @@
     <div class="col-lg-8 col-md-7 col-sm-6">
       <h1>Lots</h1>
       <p class="lead">You can see all of your lots</p>
-					<p><%= link_to 'New', new_lot_path %></p>
+			<p><%= link_to 'New', new_lot_path,:class=>"btn btn-primary" %>
+			</p>
     </div>
   </div>
 </div>
@@ -15,6 +16,13 @@
   <div class="panel-body">
         <div id="shieldui-grid1"></div>
   </div>
+</div>
+	<div class="form-group">
+				<% @categorie = Categorie.new %>
+				<%= form_for(@categorie) do |f| %>
+				<%= f.text_field :name,:placeholder=>"Add your categorie",:class=>"col-lg-2 form-control" %>
+						<%= f.submit :class=>"btn btn-warning" %>
+				<% end %>
 </div>
 
 <!-- TO FILL THE LIST -->
@@ -28,12 +36,12 @@
 				description: "<%= lot.description %>",
 				categorie: "<% if lot.categorie_id	%> <% categorieName = Categorie.find(lot.categorie_id).name  %> <a href=categories/<%= lot.categorie_id%>> <%= categorieName %></a><% else %> - <% end %>",
 				date_buy: "<%= lot.date_buy %>".split(' ')[0],
-				price_buy: "<%= lot.price_buy %>",
+				price_buy: "<% if lot.parent_id	%> xxx <% else %><%= lot.price_buy %><%end%>",
 				date_sold: "<%= lot.date_sold %>".split(' ')[0],
 				price_sold: "<%= lot.price_sold %>",
 				parent_name: "<% if lot.parent_id	%> <% parentName = Lot.find(lot.parent_id).name  %> <a href=lots/<%= lot.parent_id%>> <%= parentName %></a><% else %> - <% end %>",
 				created_at: "<%= lot.created_at %>".split(' ')[0],
-				edit:"<button type='button' class='btn btn-primary'>Edit</button> "},
+				edit:"<a href=lots/<%= lot.id%>/edit>Edit "},
 			<% end %>
 		];
 
@@ -46,7 +54,7 @@
 			},
 			rowHover: false,
 			paging: {
-			pageSize:3
+			pageSize:15
 			},
 			columns: [
 			{ field: "name", title: "Name" },

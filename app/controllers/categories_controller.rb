@@ -7,15 +7,16 @@ class CategoriesController < ApplicationController
 	def create 
 		@categorie = Categorie.new(get_params)
 		@categories = Categorie.all
+		@lots = Lot.all
 		if @categorie.name.blank?
-			render 'index'
+			render 'lots/index'
 		else
 			@categorie.name = @categorie.name.downcase
 			if Categorie.exists?(:name => @categorie.name)
-				render 'index'
+				render 'lots/index'
 			else
 				@categorie.save
-				render 'index'
+				render 'lots/index'
 			end
 		end
 	end

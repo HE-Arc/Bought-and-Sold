@@ -28,7 +28,7 @@
 				price_sold: "<%= lot.price_sold %>",
 				parent_name: "<% if lot.parent_id	%> <% parentName = Lot.find(lot.parent_id).name  %> <a href=lots/<%= lot.parent_id%>> <%= parentName %></a><% else %> - <% end %>",
 				created_at: "<%= lot.created_at %>".split(' ')[0],
-				edit:"<button type='button' class='btn btn-primary'>Edit</button> "},
+				edit:"<a href=/lots/<%= lot.id%>/edit>Edit "},
 			<% end %>
 		];
 
@@ -41,7 +41,7 @@
 			},
 			rowHover: false,
 			paging: {
-			pageSize:3
+			pageSize:50
 			},
 			columns: [
 			{ field: "name", title: "Name" },              

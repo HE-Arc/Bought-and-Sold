@@ -8,16 +8,15 @@ $(function()
       var lotsSold = [];
       for (var i = 0; i < data.length; i++) { 
         var tmp = {};
-        tmp.pointName=data[i].name;
-        tmp.x = i;
-        tmp.y = data[i].price_buy;
-        lotsBuy.push(tmp);
-        tmp = {};
-        tmp.pointName=data[i].name;
-        tmp.x = i;
-        tmp.y = data[i].price_sold;
-        lotsSold.push(tmp);
-      
+					tmp.pointName=data[i].name;
+					tmp.x = i;
+					tmp.y = data[i].price_buy;
+					lotsBuy.push(tmp);
+					tmp = {};
+					tmp.pointName=data[i].name;
+					tmp.x = i;
+					tmp.y = data[i].price_sold;
+					lotsSold.push(tmp);
       }
 
       fillHistoryChart(lotsBuy,lotsSold);

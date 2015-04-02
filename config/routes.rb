@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get "graphics" => "graphics#index"
   get "graphics/values" => "graphics#values"
 	get "about" => "pages#about"
+	
+	get 'lots/:id/addChild' => 'lots#addChild', :as => 'add_child'
 
 	resources :lots
 	
