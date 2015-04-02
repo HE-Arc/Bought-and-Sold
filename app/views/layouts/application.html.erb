@@ -3,7 +3,6 @@
   <head>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
 
     <meta charset="utf-8">
@@ -32,8 +31,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/home">Home</a></li>
-            <li><a href="/lots">Lots</a></li>
-            <li><a href="/about">About</a></li>
+            <li class="active"><a href="/lots">Lots</a></li>
+            <li class="active"><a href="/graphics">Graphics</a></li>
+            <li class="active"><a href="/about">About</a></li>
           </ul>
           <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
@@ -71,7 +71,7 @@
     <footer>
       <small>© HE-ARC 2015</small>
     </footer>
-      
     </div>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </body>
 </html>
