@@ -17,7 +17,12 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">Categorie</div>
 	<div class="panel-body">
-		<%= @lot.name %>
+		<% if @lot.categorie_id %>
+		<% @categorie = Categorie.find(@lot.categorie_id) %>
+		<%= link_to @categorie.name, controller: "categories", action: "show", id: @categorie.id %>
+		<% else %>
+		-
+		<% end%>
 	</div>
 </div>
 
@@ -35,10 +40,11 @@
 	<div class="panel-heading">Sold</div>
 	<div class="panel-body">
 		<% if @lot.date_sold %>
-				<strong><%=  @lot.date_buy.to_formatted_s.split(' ')[0] %></strong>,
-		sold for <strong><%= @lot.price_buy %> $</strong>
+				<strong><%=  @lot.date_sold.to_formatted_s.split(' ')[0] %></strong>,
+		sold for <strong><%= @lot.price_sold %> $</strong>
+		<% else %>
+					Not sold yet
 		<% end %>
-		Not sold yet
 	</div>
 </div>
 

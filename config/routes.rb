@@ -4,13 +4,7 @@ Rails.application.routes.draw do
   root "pages#home"
   
   get "home" => "pages#home"
-  get "register" => "pages#register"
-  get "login" => "pages#login"
-  get "lot" => "pages#lot"
-	get "lots" => "lots#index"
-  get "create_lot" => "pages#create_lot"
   get "about" => "pages#about"
-	
 	get 'users' => 'users#index'
 	
 	resources :lots
