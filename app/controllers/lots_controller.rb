@@ -1,7 +1,10 @@
 class LotsController < ApplicationController
 	def show
-		@lot = Lot.find(params[:id])
-		
+		@lot = Lot.where(id: params[:id]).first
+		if !@lot
+			@lots = Lot.where(user_id: current_user.id)
+			render 'index'
+		end
 	end	
 
 	def index
