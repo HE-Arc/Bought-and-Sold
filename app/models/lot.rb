@@ -11,7 +11,12 @@ class Lot < ActiveRecord::Base
 	end
 	def self.search(search,userID)
 		search_condition = "%" + search + "%"
-		@lots = Lot.where("name LIKE :search and user_id = :userID",{:search => search_condition,:userID => userID})
+		@categories = Categorie.where("name LIKE :search",{:search => search_condition})
+		categories_ID = []
+		@categories.each do |categorie|
+			categories_ID << categorie.id
+    end
+		@lots = Lot.where("name LIKE :search OR categorie_id IN (:categoriesID) AND user_id = :userID",{:search => search_condition,:userID => userID,:categoriesID => categories_ID})
 		return @lots
 	end
 end
