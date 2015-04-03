@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "home" => "pages#home"
   get "graphics" => "graphics#index"
   get "graphics/values" => "graphics#values"
+  get "lots/values" => "lots#values"
 	get "about" => "pages#about"
 	
 	get 'lots/:id/addChild' => 'lots#addChild', :as => 'add_child'

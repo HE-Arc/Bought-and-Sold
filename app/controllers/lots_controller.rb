@@ -9,6 +9,12 @@ class LotsController < ApplicationController
 
 	def index
 		@lots = Lot.where(user_id: current_user.id)
+    @benefit = 0
+    @lots.each do |lot|
+      if lot.price_sold != 0
+        @benefit = lot.price_sold - lot.price_buy
+      end
+    end
 	end
 
 	def new
@@ -83,6 +89,12 @@ class LotsController < ApplicationController
 		redirect_to lots_path
 	end
 
+  def values
+		@Lots = Lot.where(user_id: current_user.id)
+    @Categories = Categorie.all;
+    render json: [@Lots,@Categories]
+  end
+  
 	private
 	def get_params
 		params[:lot].permit(:name,:description,:date_buy,:date_sold,:price_buy,:price_sold,:price_estimated,:categorie_id,:parent_id,:user_id,:created_at)

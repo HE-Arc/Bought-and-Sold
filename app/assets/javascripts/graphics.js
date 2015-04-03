@@ -9,23 +9,13 @@ $(document).ready(function() {
 			for (var i = 0; i < data.length; i++) { 
 				if(data[i].price_sold != 0){
 					tmp = {};
-						tmp.pointName = data[i].name;
-						tmp.x = i;
-						tmp.y = data[i].price_sold-data[i].price_buy;
-						lotsBenefits.push(tmp);
-						nbSold += data[i].price_sold;
-						nbBuy += data[i].price_buy;
-				}
-				/*
-        else
-          {
-          tmp = {};
           tmp.pointName = data[i].name;
           tmp.x = i;
-          tmp.y = 0;
+          tmp.y = data[i].price_sold-data[i].price_buy;
           lotsBenefits.push(tmp);
-          }*/
-
+          nbSold += data[i].price_sold;
+          nbBuy += data[i].price_buy;
+				}
 			}
 
 			fillBenefits(lotsBenefits);
@@ -39,7 +29,7 @@ $(document).ready(function() {
 			theme: "dark",
 
 			primaryHeader: {
-				text: "Benefits"
+				text: "Profits"
 			},
 			exportOptions: {
 				image: false,
@@ -66,7 +56,7 @@ $(document).ready(function() {
 			},
 			dataSeries: [
 				{
-					collectionAlias: "Benefits per batch",
+					collectionAlias: "Profit per batch",
 					color: "#CCCCCC",
 					seriesType: "bar",
 					data: lotsBenefits
