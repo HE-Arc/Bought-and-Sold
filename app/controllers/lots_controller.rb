@@ -6,6 +6,11 @@ class LotsController < ApplicationController
 			render 'index'
 		end
 	end	
+	
+	def search
+		@lots = Lot.search(params[:search], current_user.id)
+		render '_search_results'
+	end
 
 	def index
 		@lots = Lot.where(user_id: current_user.id)
