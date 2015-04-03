@@ -37,8 +37,8 @@
 		<div class="panel-body">
 			<% if @lot.date_buy %>
 			<strong><%=  @lot.date_buy.to_formatted_s.split(' ')[0] %></strong>,
+      <% end %>
 			purchased for <strong><%= @lot.price_buy %> $</strong>
-			<% end %>
 		</div>
 	</div>
 
@@ -47,8 +47,10 @@
 		<div class="panel-body">
 			<% if @lot.date_sold %>
 			<strong><%=  @lot.date_sold.to_formatted_s.split(' ')[0] %></strong>,
-			sold for <strong><%= @lot.price_sold %> $</strong>
-			<% else %>
+      <% end %>
+      <% if @lot.price_sold %>
+      sold for <strong><%= @lot.price_sold %> $</strong>
+      <% else %>
 			Not sold yet
 			<% end %>
 		</div>
