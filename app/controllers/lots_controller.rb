@@ -5,6 +5,13 @@ class LotsController < ApplicationController
 			@lots = Lot.where(user_id: current_user.id)
 			render 'index'
 		end
+    
+    @profits = @lot.price_sold
+    Lot.where(user_id: current_user.id).each do |l|
+      if l.parent_id == @lot.id
+        @profits += l.price_sold
+      end
+    end
 	end	
 	
 	def search
@@ -14,10 +21,10 @@ class LotsController < ApplicationController
 
 	def index
 		@lots = Lot.where(user_id: current_user.id)
-    @benefit = 0
+    @profit = 0
     @lots.each do |lot|
-      if lot.price_sold != 0
-        @benefit = lot.price_sold - lot.price_buy
+      if lot.price_sold
+        @profit = lot.price_sold - lot.price_buy
       end
     end
 	end

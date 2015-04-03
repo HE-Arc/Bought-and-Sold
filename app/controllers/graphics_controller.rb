@@ -4,7 +4,7 @@ class GraphicsController < ApplicationController
   end
   
   def values
-		@Lots = Lot.where(user_id: current_user.id).where(:parent_id => [nil])
+		@Lots = Lot.where(user_id: current_user.id)
     render json: @Lots
   end
 

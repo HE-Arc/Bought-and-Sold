@@ -1,22 +1,51 @@
 
 $(function() 
-                  {
+  {
   $.ajax({
     url : "graphics/values",
     success: function(data) {
       var lotsBuy = [];
       var lotsSold = [];
-      for (var i = 0; i < data.length; i++) { 
-        var tmp = {};
-					tmp.pointName=data[i].name;
-					tmp.x = i;
-					tmp.y = data[i].price_buy;
-					lotsBuy.push(tmp);
-					tmp = {};
-					tmp.pointName=data[i].name;
-					tmp.x = i;
-					tmp.y = data[i].price_sold;
-					lotsSold.push(tmp);
+        var dico = new Array();
+          for (var i = 0; i < data.length; i++) { 
+            if(data[i].parent_id !== null)
+            {
+              for(var j=0; j < data.length; j++)
+              {
+                if(data[j].id == data[i].parent_id)
+                {
+                  dico[data[j].id] = 0;
+                }
+              }
+              for(j=0; j < data.length; j++)
+              {
+                if(data[j].id == data[i].parent_id)
+                {
+                  if(dico[data[j].id] !== 0){
+                    dico[data[j].id] += data[i].price_sold;
+                  }
+                  else{
+                    dico[data[j].id] = data[i].price_sold;
+                  }
+                } 
+              }
+            }
+          }
+        
+    for (var i = 0; i < data.length; i++) { 
+          if(data[i].parent_id === null)
+        {  
+          var tmp = {};
+          tmp.pointName=data[i].name;
+          tmp.x = i;
+          tmp.y = data[i].price_buy;
+          lotsBuy.push(tmp);
+          tmp = {};
+          tmp.pointName=data[i].name;
+          tmp.x = i;
+          tmp.y = data[i].price_sold+dico[data[i].id];
+          lotsSold.push(tmp);
+        }
       }
 
       fillHistoryChart(lotsBuy,lotsSold);
@@ -37,24 +66,17 @@ $(function()
         print: false
       },
       axisX: {
-        title: {
-                text: "Creation of batches",
-                style: {
-                    color: "#FFFFFF"
-                }
-            },
         axisTickText: {
-          format: "",
-          step: 4
-        }
+          enabled:false
+        },
       },
       axisY: {
         title: {
-                text: "Price ($)",
-                style: {
-                    color: "#FFFFFF"
-                }
-            },
+          text: "Price ($)",
+          style: {
+            color: "#FFFFFF"
+          }
+        },
         axisTickText: {
           // format the text as a currency
           format: "{text:c}"

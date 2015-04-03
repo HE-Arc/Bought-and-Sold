@@ -6,16 +6,45 @@ $(document).ready(function() {
 			var tmp = {};
 			var nbBuy = 0;
 			var nbSold = 0;
-			for (var i = 0; i < data.length; i++) { 
-				if(data[i].price_sold != 0){
-					tmp = {};
-          tmp.pointName = data[i].name;
-          tmp.x = i;
-          tmp.y = data[i].price_sold-data[i].price_buy;
-          lotsBenefits.push(tmp);
-          nbSold += data[i].price_sold;
-          nbBuy += data[i].price_buy;
-				}
+      var dico = new Array();
+      for (var i = 0; i < data.length; i++) { 
+        if(data[i].parent_id !== null)
+          {
+             for(var j=0; j < data.length; j++)
+               {
+                 if(data[j].id == data[i].parent_id)
+                   {
+                     dico[data[j].id] = 0;
+                   }
+               }
+            for(j=0; j < data.length; j++)
+               {
+                 if(data[j].id == data[i].parent_id)
+                  {
+                    if(dico[data[j].id] !== 0){
+                      dico[data[j].id] += data[i].price_sold;
+                    }
+                    else{
+                      dico[data[j].id] = data[i].price_sold;
+                    }
+                  } 
+               }
+          }
+      }
+      
+      for (i = 0; i < data.length; i++) { 
+        if(data[i].parent_id === null)
+          {
+          if(data[i].price_sold !== 0){
+            tmp = {};
+            tmp.pointName = data[i].name;
+            tmp.x = i;
+            tmp.y = (data[i].price_sold+dico[data[i].id])-data[i].price_buy;
+            lotsBenefits.push(tmp);
+            }
+          }
+        nbSold += data[i].price_sold;
+        nbBuy += data[i].price_buy;
 			}
 
 			fillBenefits(lotsBenefits);
@@ -37,9 +66,8 @@ $(document).ready(function() {
 			},
 			axisX: {
 				axisTickText: {
-					format: "",
-					step : 4
-				}
+          enabled:false
+        },
 			},
 			axisY: {
 				axisTickText: {

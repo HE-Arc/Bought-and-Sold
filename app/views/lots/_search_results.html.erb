@@ -1,5 +1,3 @@
-
-
 <% @lots.each do |lot| %>
-<%= lot.name %>
+<a href="lots/<%= lot.id %>"> <%= lot.name %></a><br>
 <% end %>
