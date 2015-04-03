@@ -25,7 +25,14 @@ $(function()
           tmp.categorie = "-";
         }
 
-        tmp.date_buy = data[i].date_buy.split(' ')[0];
+        if(data[i].date_buy !== null)
+          {
+          tmp.date_buy = ((data[i].date_buy).split('T'))[0];
+          }
+        else
+          {
+            tmp.date_buy = "-";
+          }
 
         if(data[i].parent_id){
           tmp.price_buy = "0";
@@ -34,7 +41,15 @@ $(function()
         {
           tmp.price_buy = data[i].price_buy;
         }
-        tmp.date_sold = (data[i].date_sold+"").split(' ')[0];
+        
+        if(data[i].date_sold !== null)
+          {
+            tmp.date_sold = (data[i].date_sold+"").split('T')[0];
+          }
+        else
+          {
+           tmp.date_sold = "-"; 
+          }
         tmp.price_sold = data[i].price_sold;
         if(data[i].parent_id){
           for (var j = 0; j < data.length; j++) { 
@@ -48,7 +63,7 @@ $(function()
         {
           tmp.parent_name = "-"
         }
-        tmp.created_at =data[i].created_at.split(' ')[0];
+        tmp.created_at =data[i].created_at.split('T')[0];
         tmp.edit = "<a href=lots/"+data[i].id+"/edit>Edit "
         lots.push(tmp);
       }
