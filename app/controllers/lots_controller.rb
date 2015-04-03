@@ -39,13 +39,6 @@ class LotsController < ApplicationController
 	def create 		
 		@lot = Lot.new(get_params)
 		@lot.user_id = current_user.id
-			if @lot.parent_id
-				@parent = Lot.find(@lot.parent_id)
-				@parent.price_sold += @lot.price_sold
-				@lot.date_buy = @parent.date_buy
-				@parent.save
-				@lot.save
-			end
 		if @lot.save
 			redirect_to @lot
 		else
@@ -67,17 +60,6 @@ class LotsController < ApplicationController
 	def update
 		@lot = Lot.find(params[:id])
 		if @lot.update(get_params)
-			if @lot.parent_id
-				@parent = Lot.find(@lot.parent_id)
-				@parent.price_sold = 0
-				@children = Lot.where(parent_id: @parent.id)
-				@children.each do |l|
-					@parent.price_sold += l.price_sold
-				end
-				@lot.date_buy = @parent.date_buy
-				@parent.save
-				@lot.save
-			end
 			redirect_to @lot
 		else
 			render 'edit'
