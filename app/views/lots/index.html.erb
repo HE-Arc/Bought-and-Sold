@@ -17,13 +17,22 @@
     <div id="shieldui-grid1"></div>
   </div>
 </div>
-<div class="col-lg-8 col-md-7 col-sm-6">
-  <div class="form-group">
-      <% @categorie = Categorie.new %>
-      <%= form_for(@categorie) do |f| %>
-      <%= f.text_field :name,:placeholder=>"Add your categorie",:class=>"form-control" %>
-      <%= f.submit :class=>"btn btn-warning" %>
-      <% end %>
+
+<div class="page-header" id="banner">
+  <div class="row">
+    <div class="col-lg-6 col-md-5 col-sm-4">
+      <h2>Add categories</h2>
+        <div class="form-group">
+          <% @categorie = Categorie.new %>
+          <%= form_for(@categorie) do |f| %>
+          <div class="navbar-form navbar-left">
+					
+          <%= f.text_field :name,:placeholder=>"Add your categorie",:class=>"form-control" %>
+          <%= f.submit :class=>"btn btn-warning" %>
+          </div>
+          <% end %>
+        </div>
     </div>
+  </div>
 </div>
 

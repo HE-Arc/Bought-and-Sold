@@ -6,34 +6,30 @@ $(function()
     success: function(data) {
       var lotsBuy = [];
       var lotsSold = [];
-        var dico = new Array();
-          for (var i = 0; i < data.length; i++) { 
-            if(data[i].parent_id !== null)
+      var dico = new Array();
+      
+      for (var i = 0; i < data.length; i++) { 
+        if(data[i].parent_id !== null)
+        {
+          for(var j=0; j < data.length; j++)
+          {
+            if(data[j].id == data[i].parent_id)
             {
-              for(var j=0; j < data.length; j++)
-              {
-                if(data[j].id == data[i].parent_id)
-                {
-                  dico[data[j].id] = 0;
-                }
-              }
-              for(j=0; j < data.length; j++)
-              {
-                if(data[j].id == data[i].parent_id)
-                {
-                  if(dico[data[j].id] !== 0){
-                    dico[data[j].id] += data[i].price_sold;
-                  }
-                  else{
-                    dico[data[j].id] = data[i].price_sold;
-                  }
-                } 
-              }
+              dico[data[j].id] = 0;
             }
           }
-        
-    for (var i = 0; i < data.length; i++) { 
-          if(data[i].parent_id === null)
+          for(j=0; j < data.length; j++)
+          {
+            if(data[j].id == data[i].parent_id)
+            {
+                dico[data[j].id] += data[i].price_sold;
+            } 
+          }
+        }
+      }
+
+      for (i = 0; i < data.length; i++) { 
+        if(data[i].parent_id === null)
         {  
           var tmp = {};
           tmp.pointName=data[i].name;
@@ -43,11 +39,13 @@ $(function()
           tmp = {};
           tmp.pointName=data[i].name;
           tmp.x = i;
-          tmp.y = data[i].price_sold+dico[data[i].id];
+          tmp.y = data[i].price_sold;
+          if(dico[data[i].id])
+            tmp.y += dico[data[i].id];
           lotsSold.push(tmp);
         }
       }
-
+      
       fillHistoryChart(lotsBuy,lotsSold);
     },
     type: "GET"
