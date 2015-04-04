@@ -52,7 +52,7 @@ $(function()
           }
         tmp.price_sold = data[i].price_sold;
         if(data[i].parent_id){
-          for (var j = 0; j < data.length; j++) { 
+          for (j = 0; j < data.length; j++) { 
             if(data[i].parent_id == data[j].id)
             {
               tmp.parent_name = "<a href=lots/"+data[j].id+"> "+data[j].name+"</a>";

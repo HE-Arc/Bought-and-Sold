@@ -21,12 +21,7 @@ $(document).ready(function() {
                {
                  if(data[j].id == data[i].parent_id)
                   {
-                    if(dico[data[j].id] !== 0){
                       dico[data[j].id] += data[i].price_sold;
-                    }
-                    else{
-                      dico[data[j].id] = data[i].price_sold;
-                    }
                   } 
                }
           }
@@ -39,7 +34,10 @@ $(document).ready(function() {
             tmp = {};
             tmp.pointName = data[i].name;
             tmp.x = i;
-            tmp.y = (data[i].price_sold+dico[data[i].id])-data[i].price_buy;
+            tmp.y = data[i].price_sold-data[i].price_buy;
+            if(dico[data[i].id]){
+              tmp.y += dico[data[i].id];
+            }
             lotsBenefits.push(tmp);
             }
           }

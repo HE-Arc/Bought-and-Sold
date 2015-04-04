@@ -20,6 +20,9 @@ class LotsController < ApplicationController
 	
 	def search
 		@lots = Lot.search(params[:search], current_user.id)
+    respond_to do |format|
+      format.js { render :action => "search", :layout => false }
+    end
 		render '_search_results'
 	end
 
