@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326143102) do
+ActiveRecord::Schema.define(version: 20150404182511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20150326143102) do
     t.float    "price_buy"
     t.float    "price_sold"
     t.float    "price_estimated"
-    t.datetime "date_buy"
-    t.datetime "date_sold"
+    t.date     "date_buy"
+    t.date     "date_sold"
     t.datetime "created_at"
     t.integer  "user_id"
     t.integer  "parent_id"

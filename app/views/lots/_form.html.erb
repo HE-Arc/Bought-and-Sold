@@ -39,9 +39,9 @@
 		<div class="col-lg-3">
 			<% if @lot.date_buy %>
 				<% @dateBuy = @lot.date_buy%>
-			<%= f.text_field :date_buy,:value => @dateBuy.to_date,:class=>"form-control",:placeholder => "yyy-mm-dd",:pattern=>"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$" %>
+			<%= f.text_field :date_buy,:value => @dateBuy,:class=>"form-control",:placeholder => "yyyy-mm-dd",:pattern=>"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$" %>
 			<% else %>
-				<%= f.text_field :date_buy,:class=>"form-control",:placeholder => "yyy-mm-dd",:pattern=>"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$" %>
+				<%= f.text_field :date_buy,:class=>"form-control",:placeholder => "yyyy-mm-dd",:pattern=>"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$" %>
 			<%end%>
 		</div>
 	</div>
@@ -58,9 +58,9 @@
 		<div class="col-lg-3">
 			<% if @lot.date_sold %>
 				<% @dateSold = @lot.date_sold%>
-			<%= f.text_field :date_sold,:value => @dateSold.to_date,:class=>"form-control",:placeholder => "yyy-mm-dd",:pattern=>"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$" %>
+			<%= f.text_field :date_sold,:value => @dateSold,:class=>"form-control",:placeholder => "yyyy-mm-dd",:pattern=>"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$" %>
 			<% else %>
-			<%= f.text_field :date_sold,:class=>"form-control",:placeholder => "yyy-mm-dd",:pattern=>"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$" %>
+			<%= f.text_field :date_sold,:class=>"form-control",:placeholder => "yyyy-mm-dd",:pattern=>"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$" %>
 			<%end%>
 		</div>
 	</div>
