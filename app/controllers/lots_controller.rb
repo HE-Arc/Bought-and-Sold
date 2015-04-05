@@ -20,6 +20,7 @@ class LotsController < ApplicationController
 	
 	def search
 		@lots = Lot.search(params[:search], current_user.id)
+    @categories = Categorie.all
 		render '_search_results'
 	end
 

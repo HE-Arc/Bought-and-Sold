@@ -11,7 +11,7 @@
 		<h3 class="panel-title">List of all your lots in the categorie <%= @categorie.name %></h3>
   </div>
   <div class="panel-body">
-        <div id="shieldui-grid1"></div>
+        <div id="shieldui-gridCat"></div>
   </div>
 </div>
 
@@ -32,7 +32,7 @@
 			<% end %>
 		];
 
-			$("#shieldui-grid1").shieldGrid({
+			$("#shieldui-gridCat").shieldGrid({
 			dataSource: {
 			data: lots
 			},

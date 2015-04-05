@@ -1,3 +1,38 @@
-<% @lots.each do |lot| %>
-<a href="lots/<%= lot.id %>"> <%= lot.name %></a><br>
-<% end %>
+<div class="page-header" id="banner">
+  <div class="row">
+    <div class="col-lg-8 col-md-7 col-sm-6">
+			<h1>Result of the research</h1>
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Categorie</th>
+      <th>Description</th>
+      <th>Buy Date</th>
+      <th>Buy Price</th>
+      <th>Sold Date</th>
+      <th>Sold Price</th>
+      <th>Parent</th>
+      <th>Created at</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lots.each do |lot| %>
+    <tr>
+      <td><a href="lots/<%= lot.id %>"><%= lot.name %></a></td>
+      <td><% if lot.categorie_id	%> <% catName = Categorie.find(lot.categorie_id).name  %> <a href="categories/<%= lot.categorie_id%>"> <%= catName %></a><% else %> - <% end %></td>
+      <td><%= lot.description %></td>
+      <td><%= lot.date_buy %></td>
+      <td><%= lot.price_buy %></td>
+      <td><%= lot.date_sold %></td>
+      <td><%= lot.price_sold %></td>
+      <td><% if lot.parent_id	%> <% parentName = Lot.find(lot.parent_id).name  %> <a href="lots/<%= lot.parent_id%>"> <%= parentName %></a><% else %> - <% end %></td>
+      <td><%= lot.created_at %></td>
+      <td><a href="lots/<%= lot.id %>/edit">Edit</a></td>
+    </tr>
+    <% end %>
